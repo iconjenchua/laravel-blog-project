@@ -38,6 +38,6 @@ class BlogController extends Controller
         $this->data['related_posts'] = $related_posts;
         $this->data['post'] = $post;
         
-        return view('post', $this->data);
+        return view('posts.show', $this->data);
     }
 }

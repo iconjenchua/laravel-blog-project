@@ -18,5 +18,5 @@ Route::group(['middleware' => []], function() {
     
     Route::post('login', 'AdminController@postLogin');
     Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@dashboard'])->middleware('auth.basic');
-    Route::get('admin/post/edit/{id}', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
+    Route::get('admin/post/{id}/edit/', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
 });
