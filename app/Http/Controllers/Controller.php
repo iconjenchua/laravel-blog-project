@@ -14,8 +14,8 @@ class Controller extends BaseController
     
     public $data;
     
-    public function __construct() {        
-        define('SITE_TITLE', 'Laravel Blog');
-        define('PAGE_TITLE', ' :: Laravel Blog');
+    public function __construct() {
+        if( ! defined('SITE_TITLE') ) define('SITE_TITLE', 'Laravel Blog');
+        if( ! defined('PAGE_TITLE') ) define('PAGE_TITLE', ' :: Laravel Blog');
     }
 }
