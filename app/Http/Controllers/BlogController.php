@@ -17,7 +17,7 @@ class BlogController extends Controller
         $posts = Post::with('Author')->orderBy('published_at', 'DESC')->paginate(5);
         
         $this->data['posts'] = $posts;
-        $this->data['page_title'] = PAGE_TITLE . 'Home Page';
+        $this->data['page_title'] = 'Home Page' . PAGE_TITLE;
         
         return view('home', $this->data);
     }
@@ -29,7 +29,7 @@ class BlogController extends Controller
         // get related posts
         $related_posts = Post::where('id', '!=', $post->id)->with('Author')->limit(3)->inRandomOrder()->get();
         
-        $this->data['page_title'] = $post->title . ' | ' . SITE_TITLE;
+        $this->data['page_title'] = $post->title . PAGE_TITLE;
         $this->data['related_posts'] = $related_posts;
         $this->data['post'] = $post;
         

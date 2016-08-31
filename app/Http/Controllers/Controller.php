@@ -16,6 +16,6 @@ class Controller extends BaseController
     
     public function __construct() {        
         define('SITE_TITLE', 'Laravel Blog');
-        define('PAGE_TITLE', 'Laravel Blog :: ');
+        define('PAGE_TITLE', ' :: Laravel Blog');
     }
 }
