@@ -1,2 +1,5 @@
-# laravel-blog-project
-A simple blog running on Laravel 5.2
+# Laravel blog project
+
+A simple blog project running on Laravel 5.2
+
+## Instructions
