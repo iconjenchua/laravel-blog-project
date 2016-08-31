@@ -19,6 +19,7 @@
                 <nav class="blog-nav">
                     <a class="blog-nav-item" href="{{ url('') }}">Home</a>
                     <a class="blog-nav-item active" href="{{ route('admin') }}">Admin</a>
+                    <a class="blog-nav-item pull-right" href="{{ route('logout') }}">Logout</a>
                 </nav>
             </div>
         </div>
