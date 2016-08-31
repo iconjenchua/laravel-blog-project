@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserLogin;
+use App\Http\Requests\EditPost;
 use App\Http\Requests;
 
 use App\Post;
@@ -31,12 +32,20 @@ class AdminController extends Controller
     }
     
     public function editPost($id) {
-        $post = Post::whereId($id);
+        $post = Post::whereId($id)->first();
         $users = User::lists('name', 'id');
         
         $this->data['page_title'] = 'Edit post: ' . $post->title . PAGE_TITLE;
         $this->data['users'] = $users;
+        $this->data['post'] = $post;
         
         return view('posts.edit', $this->data);
+    }
+    
+    public function savePost($id, EditPost $request) {
+        
+        $post = Post::whereId($id)->update($request->except('_token'));
+        
+        return redirect()->route('post.edit', $id)->withInfo('Post updated');
     }
 }
