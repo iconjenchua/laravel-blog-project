@@ -11,4 +11,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+    
+    public $data;
+    
+    public function __construct() {        
+        define('SITE_TITLE', 'Laravel Blog');
+        define('PAGE_TITLE', 'Laravel Blog :: ');
+    }
 }
