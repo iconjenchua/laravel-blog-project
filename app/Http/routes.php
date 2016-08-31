@@ -14,9 +14,17 @@
 Route::group(['middleware' => []], function() {
     
     Route::get('/', 'BlogController@homepage');
-    Route::get('/post/{id}/{title}', ['as' => 'post', 'uses' => 'BlogController@show']);
+    Route::get('post/{id}/{title}', ['as' => 'post', 'uses' => 'BlogController@show']);
     
     Route::post('login', 'AdminController@postLogin');
-    Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@dashboard'])->middleware('auth.basic');
-    Route::get('admin/post/{id}/edit/', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
+    
+    Route::group(['prefix' => 'admin'], function() {
+        Route::get('', ['as' => 'admin', 'uses' => 'AdminController@dashboard'])->middleware('auth.basic');
+        
+        Route::group(['prefix' => 'post'], function() {
+            Route::get('create', ['as' => 'post.create', 'uses' => 'AdminController@createPost']);
+            Route::get('{id}/edit', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
+            Route::post('{id}', ['as' => 'post.save', 'uses' => 'AdminController@savePost']);
+        });
+    });
 });
