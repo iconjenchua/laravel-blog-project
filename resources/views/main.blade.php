@@ -16,11 +16,10 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="blog-nav">
-                    <a class="blog-nav-item active" href="#">Home</a>
-                    <a class="blog-nav-item" href="#">New features</a>
-                    <a class="blog-nav-item" href="#">Press</a>
-                    <a class="blog-nav-item" href="#">New hires</a>
-                    <a class="blog-nav-item" href="#">About</a>
+                    <a class="blog-nav-item active" href="{{ url('') }}">Home</a>
+                    @if(Auth::check())
+                    <a class="blog-nav-item" href="{{ route('admin') }}">Admin</a>
+                    @endif
                 </nav>
             </div>
         </div>
@@ -38,7 +37,29 @@
                 </div>
                 <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
                     <div class="sidebar-module sidebar-module-inset">
-                        <p><a href="{{ route('login') }}">Login</a></p>
+                        @if(Auth::check())
+                        <a class="" href="{{ route('admin') }}">Admin</a>
+                        @else
+                        {{ Form::open(['url' => 'login', 'method' => 'post']) }}
+                        <h4>User login</h4>
+                        
+                        @if(count($errors) > 0)
+                        @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                        @endif
+                        
+                        <div class="form-group">
+                            {{ Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email address']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
+                        </div>
+                        {{ Form::close() }}
+                        @endif
                     </div>
                 </div>
             </div>
