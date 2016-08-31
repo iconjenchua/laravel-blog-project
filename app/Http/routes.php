@@ -14,4 +14,7 @@
 Route::group(['middleware' => ['web']], function() {
     
     Route::get('/', 'BlogController@homepage');
+    Route::get('/post/{id}/{title}', ['as' => 'post', 'uses' => 'BlogController@show']);
+    
+    Route::get('/login', ['as' => 'login', 'uses' => 'AdminController@login']);
 });
