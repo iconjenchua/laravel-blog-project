@@ -3,7 +3,10 @@
 @section('content')
 <div class="blog-post">
     <h2 class="blog-post-title">{{ $post->title }}</h2>
-    <p class="blog-post-meta">{{ $post->published_at->format('F j, Y H:i A') . ' by ' . $post->Author->name }}</p>
+    <p class="blog-post-meta">
+        {{ $post->published_at->format('F j, Y H:i A') . ' by ' . $post->Author->name }}
+        @if(Auth::check())(<a href="{{ route('post.edit', $post->id) }}">Edit</a>)@endif
+    </p>
     {{ $post->body }}
 </div>
 

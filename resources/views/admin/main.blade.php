@@ -26,7 +26,7 @@
         <div class="admin-container">
 
             <div class="blog-header">
-                <h1 class="blog-title">Admin Dashboard</h1>
+                <a class="blog-nav-item active" href="{{ route('admin') }}"><h1 class="blog-title">Admin</h1></a>
             </div>
 
             @yield('content')

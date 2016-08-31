@@ -2,6 +2,8 @@
 
 @section('content')
 <h2>Blog Posts</h2>
+<p><a href="{{ route('post.create') }}" class="btn btn-primary">Create new post</a></p>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -37,7 +39,6 @@
 
 @if(count($posts))
 {{ $posts->links() }}
-@endif
 @endif
 
 @endsection
