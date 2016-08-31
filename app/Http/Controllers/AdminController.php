@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests;
 
+use App\Post;
+
 class AdminController extends Controller
 {
     public function postLogin(UserLogin $request) {
@@ -18,6 +20,12 @@ class AdminController extends Controller
     }
     
     public function dashboard() {
-        return 'dashboard';
+        
+        $posts = Post::with('Author')->paginate(10);
+        
+        $this->data['page_title'] = 'Admin Dashboard' . PAGE_TITLE;
+        $this->data['posts'] = $posts;
+        
+        return view('admin', $this->data);
     }
 }
