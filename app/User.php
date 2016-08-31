@@ -27,6 +27,6 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
     
     public function Posts() {
-        return $this->hasMany('\App\Post');
+        return $this->hasMany('\App\Post', 'id', 'user_id');
     }
 }

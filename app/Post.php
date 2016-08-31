@@ -15,6 +15,10 @@ class Post extends Model
     ];
     
     public function Author() {
-        return $this->belongsTo('\App\User');
+        return $this->belongsTo('\App\User', 'user_id', 'id');
+    }
+    
+    public function scopeMostRecent($query) {
+        return $query->orderBy('created_at', 'DESC');
     }
 }
