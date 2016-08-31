@@ -10,21 +10,19 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', ['as' => 'home', 'uses' => 'BlogController@homepage']);
+Route::get('post/{id}/{title}', ['as' => 'post', 'uses' => 'BlogController@show']);
 
-Route::group(['middleware' => []], function() {
+Route::post('login', 'AdminController@postLogin');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.basic']], function() {
+    Route::get('', ['as' => 'admin', 'uses' => 'AdminController@dashboard']);
+    Route::get('logout', ['as' => 'logout', 'uses' => 'AdminController@logout']);
     
-    Route::get('/', 'BlogController@homepage');
-    Route::get('post/{id}/{title}', ['as' => 'post', 'uses' => 'BlogController@show']);
-    
-    Route::post('login', 'AdminController@postLogin');
-    
-    Route::group(['prefix' => 'admin'], function() {
-        Route::get('', ['as' => 'admin', 'uses' => 'AdminController@dashboard'])->middleware('auth.basic');
-        
-        Route::group(['prefix' => 'post'], function() {
-            Route::get('create', ['as' => 'post.create', 'uses' => 'AdminController@createPost']);
-            Route::get('{id}/edit', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
-            Route::post('{id}', ['as' => 'post.save', 'uses' => 'AdminController@savePost']);
-        });
+    Route::group(['prefix' => 'post'], function() {
+        Route::post('store', ['as' => 'post.store', 'uses' => 'AdminController@storePost']);
+        Route::get('create', ['as' => 'post.create', 'uses' => 'AdminController@createPost']);
+        Route::get('{id}/edit', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
+        Route::post('{id}', ['as' => 'post.update', 'uses' => 'AdminController@updatePost']);
     });
 });
