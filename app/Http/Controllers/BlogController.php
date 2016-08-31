@@ -14,7 +14,7 @@ class BlogController extends Controller
 {
     public function homepage() {
         // get the blog posts
-        $posts = Post::with('Author')->orderBy('published_at', 'DESC')->paginate(5);
+        $posts = Post::activePosts()->with('Author')->orderBy('published_at', 'DESC')->paginate(5);
         
         $this->data['posts'] = $posts;
         $this->data['page_title'] = 'Home Page' . PAGE_TITLE;
@@ -27,7 +27,7 @@ class BlogController extends Controller
         $post = Post::whereId($id)->with('Author')->first();
         
         // get related posts
-        $related_posts = Post::where('id', '!=', $post->id)->with('Author')->limit(3)->inRandomOrder()->get();
+        $related_posts = Post::activePosts()->where('id', '!=', $post->id)->with('Author')->limit(3)->inRandomOrder()->get();
         
         $this->data['page_title'] = $post->title . PAGE_TITLE;
         $this->data['related_posts'] = $related_posts;

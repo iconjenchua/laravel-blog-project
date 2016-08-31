@@ -11,10 +11,12 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => []], function() {
     
     Route::get('/', 'BlogController@homepage');
     Route::get('/post/{id}/{title}', ['as' => 'post', 'uses' => 'BlogController@show']);
     
-    Route::get('/login', ['as' => 'login', 'uses' => 'AdminController@login']);
+    Route::post('login', 'AdminController@postLogin');
+    Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@dashboard']);
+    Route::get('admin/post/edit/{id}', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
 });
