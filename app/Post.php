@@ -18,7 +18,7 @@ class Post extends Model
         return $this->belongsTo('\App\User', 'user_id', 'id');
     }
     
-    public function scopeMostRecent($query) {
-        return $query->orderBy('created_at', 'DESC');
+    public function scopeActivePosts($query) {
+        return $query->whereActive(1);
     }
 }
