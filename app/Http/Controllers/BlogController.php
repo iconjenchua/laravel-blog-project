@@ -24,7 +24,12 @@ class BlogController extends Controller
     
     public function show($id) {
         // get the post by post id
-        $post = Post::whereId($id)->with('Author')->first();
+        $post = Post::whereId($id)->whereActive(1)->with('Author')->first();
+        
+        // show 404 if post not found
+        if( ! count($post) ) {
+            return abort(404);
+        }
         
         // get related posts
         $related_posts = Post::activePosts()->where('id', '!=', $post->id)->with('Author')->limit(3)->inRandomOrder()->get();
