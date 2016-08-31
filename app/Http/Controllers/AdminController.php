@@ -70,6 +70,12 @@ class AdminController extends Controller
         return redirect()->route('post.edit', $id)->withInfo('Post updated');
     }
     
+    public function deletePost($id) {
+        Post::whereId($id)->delete();
+        
+        return redirect()->route('admin')->withInfo('Post deleted');
+    }
+    
     public function logout() {
         \Auth::logout();
         

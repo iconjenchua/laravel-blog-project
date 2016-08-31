@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.basic']], function() {
     
     Route::group(['prefix' => 'post'], function() {
         Route::post('store', ['as' => 'post.store', 'uses' => 'AdminController@storePost']);
+        Route::delete('{id}/delete', ['as' => 'post.delete', 'uses' => 'AdminController@deletePost']);
         Route::get('create', ['as' => 'post.create', 'uses' => 'AdminController@createPost']);
         Route::get('{id}/edit', ['as' => 'post.edit', 'uses' => 'AdminController@editPost']);
         Route::post('{id}', ['as' => 'post.update', 'uses' => 'AdminController@updatePost']);
