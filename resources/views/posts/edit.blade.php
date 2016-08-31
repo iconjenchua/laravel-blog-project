@@ -3,7 +3,7 @@
 @section('content')
 <h2>Edit post</h2>
 
-{{ Form::model($post, ['url' => route('post.save', $post->id), 'method' => 'post']) }}
+{{ Form::model($post, ['url' => route('post.update', $post->id), 'method' => 'post']) }}
 <div class="well">
     @if(count($errors) > 0)
     <div class="alert alert-danger">
